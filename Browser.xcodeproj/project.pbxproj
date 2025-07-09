@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F018B7F2E1EBB5D00ED1A9D /* HTMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 4F018B7E2E1EBB5D00ED1A9D /* HTMLParser */; };
+		4F018B9A2E1EF46900ED1A9D /* HTMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 4F018B992E1EF46900ED1A9D /* HTMLParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F018B7F2E1EBB5D00ED1A9D /* HTMLParser in Frameworks */,
+				4F018B9A2E1EF46900ED1A9D /* HTMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 			);
 			name = Browser;
 			packageProductDependencies = (
-				4F018B7E2E1EBB5D00ED1A9D /* HTMLParser */,
+				4F018B992E1EF46900ED1A9D /* HTMLParser */,
 			);
 			productName = Browser;
 			productReference = 4F018B4D2E1EBAB700ED1A9D /* Browser.app */;
@@ -202,7 +202,7 @@
 			mainGroup = 4F018B442E1EBAB700ED1A9D;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4F018B7D2E1EBB5D00ED1A9D /* XCLocalSwiftPackageReference "../HTMLParser" */,
+				4F018B982E1EF46900ED1A9D /* XCLocalSwiftPackageReference "../HTMLParser" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4F018B4E2E1EBAB700ED1A9D /* Products */;
@@ -562,14 +562,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		4F018B7D2E1EBB5D00ED1A9D /* XCLocalSwiftPackageReference "../HTMLParser" */ = {
+		4F018B982E1EF46900ED1A9D /* XCLocalSwiftPackageReference "../HTMLParser" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../HTMLParser;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4F018B7E2E1EBB5D00ED1A9D /* HTMLParser */ = {
+		4F018B992E1EF46900ED1A9D /* HTMLParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HTMLParser;
 		};

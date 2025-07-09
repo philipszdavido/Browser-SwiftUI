@@ -8,78 +8,50 @@
 import SwiftUI
 import HTMLParser
 
+var thisHtml = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valid HTML Document</title>
+</head>
+<body>
+  <h1>Welcome to a Valid HTML Page</h1>
+  <p>This is a paragraph of text. Every HTML parser can parse this document.</p>
+
+  <ul>
+    <li>List Item 1</li>
+    <li>List Item 2</li>
+    <li>List Item 3</li>
+  </ul>
+
+  <a href="https://example.com" target="_blank">Visit Example.com</a>
+
+  <form action="/submit" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
+""";
 struct DOMRenderer: View {
     
-    let nodes: [ElementNode]
+    let nodes: [Node]
     
     var body: some View {
         
-        NavigationSplitView {
-
-        } detail: {
+        ScrollView { 
             ForEach(nodes, id: \.id) { node in
                 
-                DOMEngineRenderer(node: node)
-                Spacer()
+                DOMRendererEngine(node: node)
             }
         }
     }
     
-    @ViewBuilder
-    func render(node: ElementNode) -> some View {
-        
-        switch node.name {
-        case "div":
-            HStack {
-                Text("")
-            }
-            
-        case "h1":
-            let h1Node = node as! Element
-            ForEach(h1Node.children, id: \.id) { h1node in
-                //render(node: h1Node)
-            }.font(.largeTitle)
-            
-        default:
-            Text("\(node.name)")
-        }
-    }
 }
 
 #Preview {
-    DOMRenderer(nodes: HTMLParser().start(html: """
-    <button type="submit">Submit</button>
-"""))
-}
-
-struct DOMEngineRenderer: View {
-    let node: ElementNode
-
-    var body: some View {
-        
-        switch node.name {
-            
-        case "div":
-            VStack(alignment: .leading) {
-                ForEach((node as! Element).children, id: \.id) { child in
-                    DOMEngineRenderer(node: child)
-                }
-            }
-
-        case "span":
-            Text(node.name)
-                .font(.body)
-
-        case "button":
-            Button((node as! Element).children[0].name) {
-                print("Button clicked: \(node.id)")
-            }
-
-        case "unknown":
-            EmptyView()
-            
-        default:
-            Text("\(node.name)")
-        }
-    }
+    DOMRenderer(nodes: HTMLParser().start(html: thisHtml))
 }
