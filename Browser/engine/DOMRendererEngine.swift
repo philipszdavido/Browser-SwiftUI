@@ -40,7 +40,7 @@ struct DOMRendererEngine: View {
                 }
                 
             case .p:
-                VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top, spacing: 4) {
                     ForEach(node.children) { child in
                         DOMRendererEngine(node: child)
                     }
@@ -53,9 +53,7 @@ struct DOMRendererEngine: View {
                 }
 
             case .head:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .body:
                 ForEach(node.children) { child in
@@ -63,34 +61,22 @@ struct DOMRendererEngine: View {
                 }
 
             case .title:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .meta:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .link:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .style:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .script:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .noscript:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                EmptyView()
 
             case .header:
                 ForEach(node.children) { child in
@@ -127,45 +113,15 @@ struct DOMRendererEngine: View {
                     DOMRendererEngine(node: child)
                 }
 
-            case .h1:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .h2:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .h3:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .h4:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .h5:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .h6:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+            case .h1, .h2, .h3, .h4, .h5, .h6:
+                HTagsView(node: node)
 
             case .a:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                
+                HrefView(node: node)
 
             case .img:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                ImgView(node: node)
 
             case .br:
                 ForEach(node.children) { child in
@@ -178,18 +134,30 @@ struct DOMRendererEngine: View {
                 }
 
             case .ul:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
+                VStack(alignment: .leading, spacing: 1) {                    ForEach(node.children) { child in
+                        DOMRendererEngine(node: child)
+                    }
                 }
 
             case .ol:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
+                VStack(alignment: .leading, spacing: 1) {
+                    HStack {
+                        ForEach(node.children) { child in
+                            Text("1")
+                                .fontWeight(.bold)
+
+                            DOMRendererEngine(node: child)
+                        }
+                    }
                 }
 
             case .li:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
+                HStack {
+                    ForEach(node.children) { child in
+                        Text("•")
+                            .fontWeight(.bold)
+                        DOMRendererEngine(node: child)
+                    }
                 }
 
             case .dl:
@@ -208,39 +176,7 @@ struct DOMRendererEngine: View {
                 }
 
             case .table:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .thead:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .tbody:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .tfoot:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .tr:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .th:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
-
-            case .td:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                TableView(node: node)
 
             case .form:
                 ForEach(node.children) { child in
@@ -248,14 +184,10 @@ struct DOMRendererEngine: View {
                 }
 
             case .input:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                InputView(node: node)
 
             case .textarea:
-                ForEach(node.children) { child in
-                    DOMRendererEngine(node: child)
-                }
+                TextAreaView(node: node)
 
             case .select:
                 ForEach(node.children) { child in
@@ -274,26 +206,41 @@ struct DOMRendererEngine: View {
 
             case .iframe:
                 EmptyView()
+                
             case .canvas:
-                EmptyView()
+                CanvasView(node: node)
+
             case .video:
-                EmptyView()
+                VideoView(node: node)
+
             case .audio:
-                EmptyView()
+                AudioView(node: node)
             case .source:
                 EmptyView()
             case .track:
                 EmptyView()
+                
             case .strong:
                 EmptyView()
             case .em:
                 EmptyView()
+                
             case .b:
-                EmptyView()
+                
+                ForEach(node.children) { child in
+                    DOMRendererEngine(node: child)
+                }.bold()
+                
             case .i:
-                EmptyView()
+                ForEach(node.children) { child in
+                    DOMRendererEngine(node: child)
+                }.italic()
+                
             case .u:
-                EmptyView()
+                ForEach(node.children) { child in
+                    DOMRendererEngine(node: child)
+                }.underline()
+                
             case .small:
                 EmptyView()
             case .sub:

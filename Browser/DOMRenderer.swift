@@ -9,32 +9,24 @@ import SwiftUI
 import HTMLParser
 
 var thisHtml = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valid HTML Document</title>
-</head>
-<body>
-  <h1>Welcome to a Valid HTML Page</h1>
-  <p>This is a paragraph of text. Every HTML parser can parse this document.</p>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+  </head>
+  <body>
+  
+    <a href="https://pinterest.com/pin/create/button/?url=https::%2Fgoogle.com&media=https://firebasestorage.googleapis.com/v0/b/chidume-local-dev.appspot.com/o/QqPcvz32KBXeg10On5kZNSwy0WD2%2FDdrsrBIMkracYIA5auSd%2Fthumbnail%2Fthumb_prefix_02126cbcC4trNQ2yFG3rmlV5epSz.jpg?alt=media&token=c8e9a9d8-aeda-4211-a074-d3299522c23d&description=Test%20Springg%20jbjb">Pin on Pinterest</a>
+    
+    <!-- <a id="pin" href="https://pinterest.com/pin/create/button/?url=https://google.com
+    &media=https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=260&h=750&dpr=2&description=Test%20Springg%20jbjb">Pin </a> -->
+    <a id="pin" >Pin </a>
 
-  <ul>
-    <li>List Item 1</li>
-    <li>List Item 2</li>
-    <li>List Item 3</li>
-  </ul>
-
-  <a href="https://example.com" target="_blank">Visit Example.com</a>
-
-  <form action="/submit" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <button type="submit">Submit</button>
-  </form>
-</body>
+  </body>
 </html>
+
 """;
 struct DOMRenderer: View {
     
@@ -53,5 +45,11 @@ struct DOMRenderer: View {
 }
 
 #Preview {
-    DOMRenderer(nodes: HTMLParser().start(html: thisHtml))
+    HStack {
+        TextEditor(text: .constant(thisHtml))
+            .frame(width: 250.0)
+        ScrollView {
+            DOMRenderer(nodes: HTMLParser().start(html: thisHtml))
+        }.frame(width: 300.0)
+    }
 }
